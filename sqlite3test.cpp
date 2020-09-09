@@ -43,6 +43,30 @@ int main(int argc, char* argv[])
 		fprintf(stderr, "Opened database successfully\n");
 	}
 
+
+	/* Create table in Database */
+	sql =   "create table param_tab (    "  \
+		"id INTEGER PRIMARY KEY,     "  \
+		"pID INTEGER,                "  \
+		"min_val REAL NOT NULL,      "  \
+		"max_val REAL NOT NULL,      "  \
+		"default_val REAL NOT NULL,  "  \
+		"unit TEXT NOT NULL,         "  \
+		"description TEXT,           "  \
+		"persistence INTEGER         "  \
+		");";
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, NULL, 0, &ErrMsg);
+	
+	if ( rc != SQLITE_OK ){
+		fprintf(stderr, "SQL error: %s\n", ErrMsg);
+		sqlite3_free(ErrMsg);
+	} 
+	else {
+		fprintf(stdout, "Table created successfully\n\n");
+	}
+
 	/* Insert into Database */
 	sql =   "insert into param_tab values(NULL, 1,  0,  10,   5, \"KHZ\", \"frequency\", 1);"  \
 		"insert into param_tab values(NULL, 2,  2,  25,  10, \"V\",   \"voltage\",   1);"  \
@@ -60,7 +84,7 @@ int main(int argc, char* argv[])
 		sqlite3_free(ErrMsg);
 	} 
 	else {
-		fprintf(stdout, "Records created successfully\n");
+		fprintf(stdout, "Records created successfully\n\n");
 	}
 
 
@@ -74,9 +98,6 @@ int main(int argc, char* argv[])
 		fprintf(stderr, "SQL error: %s\n", ErrMsg);
 		sqlite3_free(ErrMsg);
 	} 
-	else {
-		fprintf(stdout, "Records created successfully\n");
-	}
 
 	sqlite3_close(db);
 
