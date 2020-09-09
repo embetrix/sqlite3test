@@ -1,0 +1,18 @@
+project(Test)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_BUILD_TYPE Debug)
+cmake_minimum_required(VERSION 3.0)
+aux_source_directory(. SRC_LIST)
+add_executable(${PROJECT_NAME} ${SRC_LIST})
+set(CMAKE_CXX_FLAGS_DEBUG  "-g")
+
+target_link_libraries(Test sqlite3) 
+
+find_path(SQLITE3_INCLUDE_DIR sqlite3.h)
+find_library(SQLITE3_LIBRARY sqlite3)
+if(NOT SQLITE3_INCLUDE_DIR)
+  message(SEND_ERROR "Failed to find sqlite3")
+endif()
+if(NOT SQLITE3_LIBRARY)
+  message(SEND_ERROR "Failed to find the sqlite3 library")
+endif()
