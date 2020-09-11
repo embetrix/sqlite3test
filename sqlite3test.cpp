@@ -5,20 +5,20 @@
 
 void update_callback(void *stuff, int op, const char *db, const char *table, sqlite_int64 rowid)
 {
-	 printf("%s table %d row was updated\n",table, (int)rowid );
+	printf("%s table %d row was updated\n",table, (int)rowid );
 }
 
 static int callback(void *, int argc, char **argv, char **colname)
 {
-   int i;
+	int i;
 
-   for (i = 0; i<argc; i++) {
+	for (i = 0; i<argc; i++) {
 
-      printf("%s = %s\n", colname[i], argv[i] ? argv[i] : "NULL");
-   }
+		printf("%s = %s\n", colname[i], argv[i] ? argv[i] : "NULL");
+	}
    
-   printf("\n");
-   return 0;
+	printf("\n");
+	return 0;
 }
 
 int main(int argc, char* argv[]) 
